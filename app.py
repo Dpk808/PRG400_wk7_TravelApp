@@ -1,10 +1,21 @@
 from __future__ import annotations
 
 import os
+import re
 import sqlite3
 from functools import wraps
 
-from flask import Flask, flash, g, redirect, render_template, request, session, url_for
+from flask import (
+    Flask,
+    flash,
+    g,
+    redirect,
+    render_template,
+    request,
+    send_from_directory,
+    session,
+    url_for,
+)
 from werkzeug.security import check_password_hash, generate_password_hash
 
 
@@ -128,9 +139,38 @@ def create_app() -> Flask:
     def destinations():
         db = get_db()
         destinations_list = db.execute(
-            "SELECT * FROM destination ORDER BY price_nrs ASC"
+            """
+            SELECT destination.*, COUNT(booking.id) AS booking_count
+            FROM destination
+            LEFT JOIN booking ON booking.destination_id = destination.id
+            GROUP BY destination.id
+            ORDER BY destination.price_nrs ASC
+            """
         ).fetchall()
-        return render_template("destinations.html", destinations=destinations_list)
+        images_dir = os.path.join(app.root_path, "images")
+        image_files = [
+            name
+            for name in os.listdir(images_dir)
+            if os.path.isfile(os.path.join(images_dir, name))
+        ]
+        image_map = {}
+        for name in image_files:
+            stem, _ = os.path.splitext(name)
+            key = stem.lower()
+            image_map[key] = name
+            key_no_digits = re.sub(r"\d+$", "", key)
+            if key_no_digits and key_no_digits not in image_map:
+                image_map[key_no_digits] = name
+        return render_template(
+            "destinations.html",
+            destinations=destinations_list,
+            image_map=image_map,
+        )
+
+    @app.route("/images/<path:filename>")
+    def image_asset(filename: str):
+        images_dir = os.path.join(app.root_path, "images")
+        return send_from_directory(images_dir, filename)
 
     @app.route("/book/<int:destination_id>", methods=("POST",))
     @login_required

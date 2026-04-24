@@ -55,11 +55,17 @@
   <span class="tag">Trips in NRs</span>
 </section>
 
+
 <div class="grid">
   {% for destination in destinations %}
+    {% set place_key = destination['title'].split(' ')[0] | lower %}
+    {% set image_file = image_map.get(place_key) if image_map else None %}
     <article class="card trip-card">
       <div class="trip-visual visual-{{ loop.index0 % 6 }}">
         <span class="trip-badge">Featured</span>
+        {% if image_file %}
+          <img class="trip-image" src="{{ url_for('image_asset', filename=image_file) }}" alt="{{ destination['title'] }}">
+        {% endif %}
       </div>
       <div class="trip-card-header">
         <h2>{{ destination['title'] }}</h2>
@@ -69,14 +75,18 @@
       <div class="trip-card-footer">
         <div>
           <span class="price">NRs {{ destination['price_nrs'] }}</span>
-          <p class="meta">All inclusive itinerary</p>
+          {% if not (g.user and g.user['role'] == 'admin') %}
+            <p class="meta">All inclusive itinerary</p>
+          {% endif %}
         </div>
-        {% if g.user %}
+        {% if g.user and g.user['role'] == 'admin' %}
+          <span class="meta">{{ destination['booking_count'] }} travellers</span>
+        {% elif g.user %}
           <form method="post" action="{{ url_for('book', destination_id=destination['id']) }}">
             <button type="submit">Book Now</button>
           </form>
         {% else %}
-          <a class="button" href="{{ url_for('login') }}">Login to Book</a>
+          <a class="button" href="{{ url_for('login') }}">Book Now</a>
         {% endif %}
       </div>
     </article>
