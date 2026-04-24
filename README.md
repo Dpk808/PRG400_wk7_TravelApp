@@ -11,6 +11,8 @@ python init_db.py
 python app.py
 ```
 
+App runs on http://127.0.0.1:5002
+
 ## Notes
 - Prices are shown in NRs.
 - Each new user starts with a balance of NRs 200000, deducted on booking.
