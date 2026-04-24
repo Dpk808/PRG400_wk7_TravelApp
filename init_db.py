@@ -39,32 +39,55 @@ def init_db() -> None:
                 ),
             )
 
-        cursor.execute("SELECT COUNT(*) FROM destination")
-        dest_count = cursor.fetchone()[0]
-        if dest_count == 0:
-            destinations = [
-                (
-                    "Bali Adventure",
-                    20,
-                    150000,
-                    "20-day Bali trip with beach stays, temples, and island tours.",
-                ),
-                (
-                    "Paris Highlights",
-                    10,
-                    300000,
-                    "10-day Paris trip with museum passes and city excursions.",
-                ),
-                (
-                    "Pokhara Escape",
-                    5,
-                    45000,
-                    "5-day Pokhara trip with lakeside resorts and sunrise views.",
-                ),
-            ]
+        cursor.execute("SELECT title FROM destination")
+        existing_titles = {row[0] for row in cursor.fetchall()}
+        destinations = [
+            (
+                "Bali Adventure",
+                20,
+                150000,
+                "20-day Bali trip with beach stays, temples, and island tours.",
+            ),
+            (
+                "Paris Highlights",
+                10,
+                300000,
+                "10-day Paris trip with museum passes and city excursions.",
+            ),
+            (
+                "Pokhara Escape",
+                5,
+                45000,
+                "5-day Pokhara trip with lakeside resorts and sunrise views.",
+            ),
+            (
+                "Tokyo Skyline",
+                7,
+                220000,
+                "7-day Tokyo trip with city tours, markets, and night districts.",
+            ),
+            (
+                "Dubai Luxe",
+                6,
+                180000,
+                "6-day Dubai trip with desert safari, marina cruise, and shopping.",
+            ),
+            (
+                "Kathmandu Heritage",
+                4,
+                35000,
+                "4-day Kathmandu trip with heritage walks and temple visits.",
+            ),
+        ]
+        new_destinations = [
+            destination
+            for destination in destinations
+            if destination[0] not in existing_titles
+        ]
+        if new_destinations:
             cursor.executemany(
                 "INSERT INTO destination (title, duration_days, price_nrs, description) VALUES (?, ?, ?, ?)",
-                destinations,
+                new_destinations,
             )
 
         connection.commit()

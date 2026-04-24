@@ -58,6 +58,9 @@
 <div class="grid">
   {% for destination in destinations %}
     <article class="card trip-card">
+      <div class="trip-visual visual-{{ loop.index0 % 6 }}">
+        <span class="trip-badge">Featured</span>
+      </div>
       <div class="trip-card-header">
         <h2>{{ destination['title'] }}</h2>
         <span class="pill">{{ destination['duration_days'] }} days</span>

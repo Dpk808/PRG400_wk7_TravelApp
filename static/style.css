@@ -260,6 +260,52 @@ body {
   gap: 14px;
 }
 
+.trip-visual {
+  position: relative;
+  height: 160px;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.2);
+}
+
+.trip-badge {
+  position: absolute;
+  top: 14px;
+  left: 14px;
+  padding: 6px 10px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.85);
+  color: var(--accent-strong);
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.visual-0 {
+  background: linear-gradient(135deg, #7f1d1d, #fecaca);
+}
+
+.visual-1 {
+  background: linear-gradient(135deg, #b91c1c, #fecaca);
+}
+
+.visual-2 {
+  background: linear-gradient(135deg, #9f1239, #fbcfe8);
+}
+
+.visual-3 {
+  background: linear-gradient(135deg, #b45309, #fcd34d);
+}
+
+.visual-4 {
+  background: linear-gradient(135deg, #dc2626, #fee2e2);
+}
+
+.visual-5 {
+  background: linear-gradient(135deg, #881337, #fecdd3);
+}
+
 .trip-card-header {
   display: flex;
   align-items: flex-start;
