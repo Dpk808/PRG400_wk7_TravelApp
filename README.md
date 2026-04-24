@@ -2,10 +2,10 @@
 
 Travel Booking Platform is a Flask web app for browsing destinations, booking trips, and managing user balances in Nepali Rupees (NRs). It includes a simple login system, booking flow, and an admin dashboard with user and booking management tools.
 
-![Travel App Dashboard]([image_url](https://github.com/Dpk808/PRG400_wk7_TravelApp/blob/main/Screenshots/1.png)) 
+!([image_url](https://github.com/Dpk808/PRG400_wk7_TravelApp/blob/main/Screenshots/1.png)) 
 
 
-![Travel App Dashboard]([image_url](https://github.com/Dpk808/PRG400_wk7_TravelApp/blob/main/Screenshots/2.png))
+![image_url](https://github.com/Dpk808/PRG400_wk7_TravelApp/blob/main/Screenshots/2.png))
 
 ## Features
 - User signup and login with session-based auth
