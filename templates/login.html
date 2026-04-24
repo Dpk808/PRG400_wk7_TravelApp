@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<section class="auth">
+  <div class="auth-panel">
+    <p class="eyebrow">Welcome back</p>
+    <h1>Continue your travel story.</h1>
+    <p class="lead">Log in to manage bookings and watch your balance update in real time.</p>
+    <ul class="auth-list">
+      <li>Instant booking confirmation</li>
+      <li>Balance-aware trips in NRs</li>
+      <li>Curated itineraries</li>
+    </ul>
+  </div>
+  <div class="card auth-card">
+    <h2>Login</h2>
+    <form method="post" class="form">
+      <label>
+        Email
+        <input type="email" name="email" required>
+      </label>
+      <label>
+        Password
+        <input type="password" name="password" required>
+      </label>
+      <button type="submit">Login</button>
+      <p class="muted">New here? <a href="{{ url_for('signup') }}">Create an account</a>.</p>
+    </form>
+  </div>
+</section>
+{% endblock %}

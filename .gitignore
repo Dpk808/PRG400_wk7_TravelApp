@@ -1,0 +1,26 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+
+# Virtual environments
+.venv/
+venv/
+env/
+
+# Environment variables
+.env
+
+# Flask / SQLite
+instance/
+*.db
+
+# IDE / OS
+.DS_Store
+.vscode/
+
+# Docker
+*.log
+
+# Archives
+*.zip

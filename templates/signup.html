@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<section class="auth">
+  <div class="auth-panel">
+    <p class="eyebrow">Join the journey</p>
+    <h1>Create your travel profile.</h1>
+    <p class="lead">Start with NRs 200000 in your wallet and book instantly.</p>
+    <ul class="auth-list">
+      <li>Save trips you love</li>
+      <li>Manage bookings in one place</li>
+      <li>Get balance updates after every booking</li>
+    </ul>
+  </div>
+  <div class="card auth-card">
+    <h2>Create Account</h2>
+    <form method="post" class="form">
+      <label>
+        Full Name
+        <input type="text" name="name" required>
+      </label>
+      <label>
+        Email
+        <input type="email" name="email" required>
+      </label>
+      <label>
+        Password
+        <input type="password" name="password" required>
+      </label>
+      <button type="submit">Sign Up</button>
+      <p class="muted">Already have an account? <a href="{{ url_for('login') }}">Login</a>.</p>
+    </form>
+  </div>
+</section>
+{% endblock %}

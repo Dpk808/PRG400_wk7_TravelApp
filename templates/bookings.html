@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<section class="page-header">
+  <div>
+    <h1>My Bookings</h1>
+    <p>Track your upcoming journeys and plan the next one.</p>
+  </div>
+  <a class="button ghost" href="{{ url_for('destinations') }}">Browse trips</a>
+</section>
+
+<div class="list">
+  {% for booking in bookings %}
+    <div class="list-item">
+      <div>
+        <strong>{{ booking['title'] }}</strong>
+        <div class="meta">{{ booking['duration_days'] }} days | NRs {{ booking['price_nrs'] }}</div>
+        <span class="status">{{ booking['status'] }}</span>
+      </div>
+      <div class="meta">Booked on {{ booking['created_at'] }}</div>
+    </div>
+  {% else %}
+    <div class="empty">
+      <h2>No bookings yet</h2>
+      <p>Your next adventure is waiting in the destinations list.</p>
+      <a class="button" href="{{ url_for('destinations') }}">Discover trips</a>
+    </div>
+  {% endfor %}
+</div>
+{% endblock %}
