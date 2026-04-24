@@ -24,3 +24,5 @@ instance/
 
 # Archives
 *.zip
+
+*.txt
